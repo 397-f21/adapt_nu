@@ -6,8 +6,9 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api';
 const MapContainer = () => {
 
   const mapStyles = {
-    height: "90vh",
-    width: "50%"};
+    height: "88vh",
+    width: "60%"
+  };
 
   const defaultCenter = {
     lat: 42.055984, lng: -87.675171
