@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { getLocationName } from './geocode';
+import locationData from './data/locations.json';
 
 
 const MapContainer = ({setLoc}) => {
@@ -31,7 +32,10 @@ const MapContainer = ({setLoc}) => {
                     })
             }
           }
-        />
+        > 
+        {locationData.map((location)=>
+        <Marker position={{lat: location.location.lat, lng: location.location.lng}}/>)}
+        </GoogleMap>
      </LoadScript>
   )
 }
