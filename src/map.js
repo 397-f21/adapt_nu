@@ -21,20 +21,19 @@ const MapContainer = ({setLoc}) => {
        googleMapsApiKey= 'AIzaSyD4_AYzIWR9qSfvZDUSXpHLpC7vsQowkUg'>
         <GoogleMap
           mapContainerStyle={mapStyles}
-          zoom={16}
+          // zoom={16}
           center={defaultCenter}
           onClick={(e) => {
               const location = getLocationName(e.latLng.lat(), e.latLng.lng());
               console.log(location);
+
               setLoc({
                       name: location, 
                       desc: "dummy description"
                     })
             }
           }
-        > 
-        {locationData.map((location)=>
-        <Marker position={{lat: location.location.lat, lng: location.location.lng}}/>)}
+        >
         </GoogleMap>
      </LoadScript>
   )
