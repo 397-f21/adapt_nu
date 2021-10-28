@@ -13,8 +13,7 @@ const MapContainer = ({setLoc}) => {
 
   const defaultCenter = {
     lat: 42.055984, lng: -87.675171
-  }
-  
+  };
 
   return (
      <LoadScript
@@ -23,7 +22,15 @@ const MapContainer = ({setLoc}) => {
           mapContainerStyle={mapStyles}
           zoom={16}
           center={defaultCenter}
-          onClick={(e) => console.log(getLocationName(e.latLng.lat(), e.latLng.lng()))}
+          onClick={(e) => {
+              const location = getLocationName(e.latLng.lat(), e.latLng.lng());
+              console.log(location);
+              setLoc({
+                      name: location, 
+                      desc: "dummy description"
+                    })
+            }
+          }
         />
      </LoadScript>
   )

@@ -8,11 +8,6 @@ const Frame = {
   subTitle: "accessiblity for all",
 };
 
-const location = {
-  name: "hi",
-  desc: "hello",
-};
-
 const Banner = ({ title, subTitle }) => (
   <div className="App-Title">
     <p></p>
@@ -30,7 +25,7 @@ const Banner = ({ title, subTitle }) => (
 
 const App = () => {
 
-  const [currLoc, setCurrLoc] = useState({})
+  const [currLoc, setCurrLoc] = useState({name: "Northwestern University, Evanston", desc: " "})
 
   return (
     <div className="container">
