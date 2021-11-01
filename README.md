@@ -2,11 +2,56 @@
 
 This branch is from Zachary Deng, just for testing.
 
+## Before start:
+
+All the test files are in the `/test` folders, please rename your files like `number_topic.test.js` such as:
+
+`05_edit_button.test.js`
+
+All the tests are as follows:
+
+- clicking on the map & having the building name appear on the right side
+- when you search for a building the building name & info will appear
+- typos in the search bar error message or no building found
+- edit button so that you can type onto the page
+- when clicking edit button submit button appears
+- When clicking submit the updated data is show
+
+Jeff - 1
+
+Kathryne - 2
+
+Sydney - 3
+
+Liqian - 4
+
+Zachary - 5
+
+Can - 6
+
 ---
 
+## How to use?
 
+### 1. `npm install`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+install essential packages before run this app
+
+### 2. `npm start`
+
+start the local server to see the demo.
+
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### 3. `npm run build`
+
+Builds the app for production to the `build` folder.
+
+### 4. `firebase deploy`
+
+deploy this app using firebase.
+
+**APP URL**: https://adapt-nu.web.app/
 
 ## Available Scripts
 
