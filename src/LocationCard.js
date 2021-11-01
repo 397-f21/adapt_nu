@@ -7,3 +7,5 @@ export const LocationCard = ({name, desc}) => (
     <p className="location-desc">{desc}</p>
 </div>
 )
+
+export default LocationCard;

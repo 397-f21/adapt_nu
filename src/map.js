@@ -2,7 +2,8 @@
 import React from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { getLocationName } from './geocode';
-
+import Geocode from "react-geocode";
+Geocode.setApiKey("AIzaSyD4_AYzIWR9qSfvZDUSXpHLpC7vsQowkUg");
 
 const MapContainer = ({setLoc}) => {
 
@@ -23,13 +24,18 @@ const MapContainer = ({setLoc}) => {
           zoom={16}
           center={defaultCenter}
           onClick={(e) => {
-              const location = getLocationName(e.latLng.lat(), e.latLng.lng());
-              console.log(location);
+            Geocode.fromLatLng(e.latLng.lat(), e.latLng.lng()).then(
+            (response) => {const address = response.results[0].formatted_address;
               setLoc({
-                      name: location, 
+                      name: address,
                       desc: "dummy description"
                     })
-            }
+              },
+              (error) => {
+                console.error(error);
+              }
+            )
+            } 
           }
         />
      </LoadScript>
