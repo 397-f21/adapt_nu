@@ -28,8 +28,7 @@ class UploadNewDataComponent extends React.Component {
             <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=>this.setState({description: event.target.value})}/>
             {this.props.user ? 
                 (<Button variant="contained" onClick={()=>this.handleSubmit()}>Submit</Button>) : 
-                <div></div>}
-          {this.props.user ? <div></div> : <SignInButton/>}
+                <SignInButton/>}
           </div>
         );
       }
