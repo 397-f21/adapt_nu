@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import MapContainer from "./map";
 import "./App.css";
 import { LocationCard } from "./LocationCard";
+import locationData from './libraries.json';
 
 const Frame = {
   title: "Adapt NU",

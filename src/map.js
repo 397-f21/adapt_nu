@@ -1,9 +1,10 @@
-
+import locationData from './libraries.json';
 import React from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import { getLocationName } from './geocode';
 import Geocode from "react-geocode";
 Geocode.setApiKey("AIzaSyD4_AYzIWR9qSfvZDUSXpHLpC7vsQowkUg");
+
 
 const MapContainer = ({setLoc}) => {
 
@@ -28,14 +29,14 @@ const MapContainer = ({setLoc}) => {
             (response) => {const address = response.results[0].formatted_address;
               setLoc({
                       name: address,
-                      desc: "dummy description"
+                      desc: locationData[address] == null? "No Data" : locationData[address].entrances
                     })
               },
               (error) => {
                 console.error(error);
               }
             )
-            } 
+            }
           }
         />
      </LoadScript>
