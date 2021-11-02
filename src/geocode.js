@@ -11,7 +11,6 @@ var address = "";
 
 // Get address from latitude & longitude.
 export const getLocationName = (lat, long) => {
-
   Geocode.fromLatLng(lat, long).then(
     (response) => {
       address = response.results[0].formatted_address;

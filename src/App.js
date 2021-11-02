@@ -25,7 +25,7 @@ const Banner = ({ title, subTitle }) => (
 
 const App = () => {
 
-  const [currLoc, setCurrLoc] = useState({name: "Northwestern University, Evanston", desc: " "})
+  const [currentLocation, setCurrLoc] = useState({address:""})
 
   return (
     <div className="container">
@@ -34,7 +34,7 @@ const App = () => {
         <div className="map">
           <MapContainer setLoc={setCurrLoc} />
         </div>
-        <LocationCard name={currLoc.name} desc={currLoc.desc} />
+        <LocationCard address={currentLocation.address} />
       </div>
     </div>
   );
