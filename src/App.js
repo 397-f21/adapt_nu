@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import MapContainer from "./map";
 import "./App.css";
-import { LocationCard } from "./LocationCard";
+import LocationCard from "./LocationCard";
 
 const Frame = {
   title: "Adapt NU",
