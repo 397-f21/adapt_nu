@@ -1,6 +1,8 @@
 import React from 'react';
-import './locationCardStyling.css'
-import {useData, setData, signInWithGoogle, useUserState} from './utilities/firebase.js'
+import './locationCardStyling.css';
+import {useData, setData, signInWithGoogle, useUserState} from './utilities/firebase.js';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const reformatAddress = (address) => address.replace(/[^A-Z0-9]+/ig, "_");
 
@@ -9,32 +11,24 @@ class UploadNewDataComponent extends React.Component {
       super(props);
       console.log('---\n', this.props.address);
       this.state = {name: '', description: ''};
-
-      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
   
-    handleSubmit(event) {
+    handleSubmit() {
       console.log('---\n', this.props.address);
       alert('A location was submitted: ' + this.state.name);
-      event.preventDefault();
       setData(this.props.address, this.state);
     }
 
     render() {
 
         return (
-          <div><form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.name} onChange={(event)=>this.setState({name: event.target.value})} />
-          </label>
-            <label>
-              Description:
-              <input type="text" value={this.state.description} onChange={(event)=>this.setState({description: event.target.value})} />
-            </label>
-            {this.props.user ? <input type="submit" value="Submit" /> : <div></div>}
-          </form>
+          <div className="upload-new-data">
+            <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event)=>this.setState({name: event.target.value})}/>
+            <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=>this.setState({description: event.target.value})}/>
+            {this.props.user ? 
+                (<Button variant="contained" onClick={()=>this.handleSubmit()}>Submit</Button>) : 
+                <div></div>}
           {this.props.user ? <div></div> : <SignInButton/>}
           </div>
         );
@@ -42,10 +36,10 @@ class UploadNewDataComponent extends React.Component {
 }
 
 const SignInButton = () => (
-    <button className="btn btn-secondary btn-sm"
+    <Button variant="outlined"
         onClick={() => signInWithGoogle()}>
       Sign In
-    </button>
+    </Button>
   );
 
 export const LocationCard = ({address}) => {
