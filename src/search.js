@@ -10,7 +10,7 @@ const SearchBar = () => (
             name="s"
             autocomplete="off"
         />
-        <button type="submit">search</button>
+        <button type="search building name">search</button>
     </form>
 );
 
