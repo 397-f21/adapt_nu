@@ -10,7 +10,7 @@ const Frame = {
 };
 
 const Banner = ({ title, subTitle }) => (
-  <div className="App-Title">
+  <div data-cy="title" className="App-Title">
     <p></p>
     <img
       src="https://i.loli.net/2021/10/28/rIKFjT8m3H5c4hv.png"

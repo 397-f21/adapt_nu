@@ -66,7 +66,7 @@ export const LocationCard = ({address}) => {
   if (loading) return <div className="location-container"><h1>Loading the location...</h1></div>
   if (location == null || location.name == null || location.description == null) {
 
-      return <div className="location-container">
+      return <div data-cy="LocationCard" className="location-container">
             <Search/>
             <h1>{address}</h1>
             <p>No data exists for {address}!</p>
@@ -78,7 +78,7 @@ export const LocationCard = ({address}) => {
     location.description = "No Data"
   }
 
-  return (<div className="location-container">
+  return (<div data-cy="LocationCard" className="location-container">
                 <Search/>
                 <h1 className="location-name">{location.name}</h1>
                 <p className="location-address">{address}</p>

@@ -16,6 +16,7 @@ const MapContainer = ({setLoc}) => {
   };
 
   return (
+    <div data-cy="map">
      <LoadScript
        googleMapsApiKey= 'AIzaSyD4_AYzIWR9qSfvZDUSXpHLpC7vsQowkUg'>
         <GoogleMap
@@ -36,7 +37,7 @@ const MapContainer = ({setLoc}) => {
             } 
           }
         />
-     </LoadScript>
+     </LoadScript></div>
   )
 }
 
