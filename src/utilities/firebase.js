@@ -1,6 +1,6 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup , onIdTokenChanged } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref , set} from 'firebase/database';
+import { getDatabase, onValue, ref , set, update} from 'firebase/database';
 import {useState, useEffect} from "react";
 
 const firebaseConfig = {
@@ -57,3 +57,7 @@ export const signInWithGoogle = () => {
   
     return [user];
   };
+
+export const editData = (path, value) => (
+  update(ref(database,path), value)
+);

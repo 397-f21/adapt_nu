@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './locationCardStyling.css';
-import {useData, setData, signInWithGoogle, useUserState} from './utilities/firebase.js';
+import {useData, setData, signInWithGoogle, useUserState, editData} from './utilities/firebase.js';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Search from './search'
@@ -38,15 +38,27 @@ const SignInButton = () => (
     </Button>
   );
 
+const EditButton = ({setIsEditing}) => (
+    <Button variant="outlined" 
+            onClick={() => setIsEditing(true)} >
+    Edit
+    </Button>
+)
 export const LocationCard = ({address}) => {
-  const reformattedAddres = reformatAddress(address);
-  const [location, loading, error] = useData('/' + reformattedAddres);
+  const reformattedAddress = reformatAddress(address);
+  const [location, loading, error] = useData('/' + reformattedAddress);
   const [user] = useUserState();
 
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentEdit, setCurrentEdit] = useState('')
 
   console.log(query)
+
+  const handleEdit = () => {
+    editData(reformattedAddress, {description: currentEdit});
+  }
 
   if (error) return <div className="location-container"> <h1>{error}</h1></div>;
   if (loading) return <div className="location-container"><h1>Loading the location...</h1></div>
@@ -56,11 +68,11 @@ export const LocationCard = ({address}) => {
             <Search/>
             <h1>{address}</h1>
             <p>No data exists for {address}!</p>
-            <UploadNewDataComponent address={reformattedAddres} user={user}/>
+            <UploadNewDataComponent address={reformattedAddress} user={user}/>
         </div>
     }
 
-  if (location.description == ""){
+  if (location.description === ""){
     location.description = "No Data"
   }
 
@@ -69,12 +81,16 @@ export const LocationCard = ({address}) => {
     //
     // console.log(location.name)
     // console.log(query)}
+  
 
   return (<div className="location-container">
                 <Search/>
                 <h1 className="location-name">{location.name}</h1>
                 <p className="location-address">{address}</p>
-                <p className="location-desc">{location.description}</p>
+                {!isEditing && <p className="location-desc">{location.description}</p>}
+                {isEditing && <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=> setCurrentEdit(event.target.value)} defaultValue={location.description} /> }
+                {user && !isEditing && <EditButton setIsEditing={setIsEditing} />}
+                {isEditing && <Button variant="contained" onClick={()=> handleEdit()}>Submit</Button>}
             </div>
         );
 };
