@@ -1,7 +1,7 @@
 import { render, screen, getByText} from "@testing-library/react";
-import Search from './search'
+import LocationCard from "../LocationCard";
 
-it("Search renders the correct data", () => {
+it("LocationCard renders with correct data", () => {
   render(<LocationCard name="test name" desc="test desc" />);
   expect(screen.getByText("test name")).toBeTruthy()
   expect(screen.getByText("test desc")).toBeTruthy()

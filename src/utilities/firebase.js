@@ -1,6 +1,6 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup , onIdTokenChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref , set} from 'firebase/database';
+import { getDatabase, onValue, ref , set, update} from 'firebase/database';
 import {useState, useEffect} from "react";
 
 const firebaseConfig = {
@@ -19,7 +19,7 @@ export const useData = (path, transform) => {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState();
-  
+
     useEffect(() => {
       const dbRef = ref(database, path);
       const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
@@ -36,7 +36,7 @@ export const useData = (path, transform) => {
         setError(error);
       });
     }, [path, transform]);
-  
+
     return [data, loading, error];
   };
 
@@ -48,16 +48,21 @@ export const signInWithGoogle = () => {
     signInWithPopup(getAuth(firebase), new GoogleAuthProvider());
   };
 
+
   export const signInWithCredentials = async (email, password) => {
     await signInWithEmailAndPassword(getAuth(firebase), email, password);
   };
 
-  export const useUserState = () => {
-    const [user, setUser] = useState();
-  
-    useEffect(() => {
-      onIdTokenChanged(getAuth(firebase), setUser);
-    }, []);
-  
-    return [user];
-  };
+export const useUserState = () => {
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    onIdTokenChanged(getAuth(firebase), setUser);
+  }, []);
+
+  return [user];
+};
+
+export const editData = (path, value) => (
+  update(ref(database,path), value)
+);
