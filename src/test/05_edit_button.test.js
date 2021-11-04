@@ -6,7 +6,7 @@ afterEach(cleanup);
 
 it(' render a submit button ', () => {
     const { getByTestId } = render(<LocationCard address="2233 Tech Dr, Evanston, IL 60208, USA"/>);
-    
+
     fireEvent.click(getByTestId('editButton'));
 
     const button = getByTestId('submitButton');
