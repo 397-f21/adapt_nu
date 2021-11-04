@@ -27,7 +27,6 @@ const Banner = ({ title, subTitle }) => (
 const App = () => {
 
   const [currentLocation, setCurrLoc] = useState({address:""})
-
   return (
     <div className="container">
       <Banner title={Frame.title} subTitle={Frame.subTitle} />

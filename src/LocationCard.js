@@ -18,9 +18,7 @@ class UploadNewDataComponent extends React.Component {
       alert('A location was submitted: ' + this.state.name);
       setData(this.props.address, this.state);
     }
-
     render() {
-
         return (
           <div className="upload-new-data">
             <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event)=>this.setState({name: event.target.value})}/>
@@ -44,6 +42,12 @@ export const LocationCard = ({address}) => {
   const reformattedAddres = reformatAddress(address);
   const [location, loading, error] = useData('/' + reformattedAddres);
   const [user] = useUserState();
+
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get('s');
+
+  console.log(query)
+
   if (error) return <div className="location-container"> <h1>{error}</h1></div>;
   if (loading) return <div className="location-container"><h1>Loading the location...</h1></div>
   if (location == null || location.name == null || location.description == null) {
@@ -55,6 +59,16 @@ export const LocationCard = ({address}) => {
             <UploadNewDataComponent address={reformattedAddres} user={user}/>
         </div>
     }
+
+  if (location.description == ""){
+    location.description = "No Data"
+  }
+
+  // if (query != location.name) {
+  //   setLoc()
+    //
+    // console.log(location.name)
+    // console.log(query)}
 
   return (<div className="location-container">
                 <Search/>
