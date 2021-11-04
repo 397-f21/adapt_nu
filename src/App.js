@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import MapContainer from "./map";
 import "./App.css";
 import { LocationCard } from "./LocationCard";
+import Search from './search'
 
 const Frame = {
   title: "Adapt NU",
@@ -26,7 +27,6 @@ const Banner = ({ title, subTitle }) => (
 const App = () => {
 
   const [currentLocation, setCurrLoc] = useState({address:""})
-
   return (
     <div className="container">
       <Banner title={Frame.title} subTitle={Frame.subTitle} />
