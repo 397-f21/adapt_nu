@@ -6,12 +6,10 @@ afterEach(cleanup);
 
 it(' render a submit button ', () => {
     const { getByTestId } = render(<LocationCard address="2233 Tech Dr, Evanston, IL 60208, USA"/>);
-    const button = getByTestId('submitButton');
-
-    act(() => {
-        fireEvent.click(getByTestId('editButton'));
-    })
     
+    fireEvent.click(getByTestId('editButton'));
+
+    const button = getByTestId('submitButton');
     expect(button).toBeEnabled();
 })
 
