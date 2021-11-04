@@ -1,13 +1,13 @@
 import { render, screen, getByText, waitFor, act, fireEvent} from "@testing-library/react";
 import LocationCard from "./LocationCard";
-import {signInToTestUser, userSetState} from "./utilities/firebase.js";
+import {signInWithCredentials} from "./utilities/firebase.js";
 
-it("LocationCard shows the accurate data when data exists",async () => {
-  act (() => render(<LocationCard address="2233 Tech Dr, Evanston, IL 60208, USA" />));
+// it("LocationCard shows the accurate data when data exists",async () => {
+//   act (() => render(<LocationCard address="2233 Tech Dr, Evanston, IL 60208, USA" />));
 
-  const counter = await waitFor(() => 
-    expect(screen.getByText("Mudd Library")).toBeTruthy())
-});
+//   const counter = await waitFor(() => 
+//     expect(screen.getByText("Mudd Library")).toBeTruthy())
+// });
 
 const makeRandomAddress = () => {
     var streetNumber = Math.floor(Math.random() * 2500);
@@ -20,23 +20,23 @@ it("UploadNewDataComponent uploads the data and displays it on LocationCard",asy
 
     var randomAddress = makeRandomAddress();
     await act (async () => {
-        try {
-            await signInToTestUser();
-        } catch (err){
-            console.log(err);
-        }
+            await signInWithCredentials("testuser@test.com", "123456");
+            
+            const signInButton = screen.getByTestId('sign-in-button')
+            const button = screen.getByTestId('submit-data-button')
+            const nameTextField = screen.getByTestId ('name-textfield')
+            const descriptionTextField = screen.getByTestId ('description-textfield')
 
-        console.log(userSetState());
+            console.log(button, nameTextField, descriptionTextField);
+            fireEvent.change(nameTextField, { target: { value: 'Test Location' } })
+            fireEvent.change(descriptionTextField, { target: { value: 'This is The Test Location' } })
 
-        const button = screen.queryByTestId('submit-data-button')
-        const nameTextField = screen.queryByTestId ('name-textfield')
-        const descriptionTextField = screen.queryByTestId ('description-textfield')
+            button.click()
+        
+            const counter = await waitFor(() => 
+                expect(screen.getByText("Mudd Library")).toBeTruthy())
 
-        button.click()
-    
-        const counter = await waitFor(() => 
-            expect(screen.getByText("Mudd Library")).toBeTruthy())
-
-        render(<LocationCard address={randomAddress}/>)});
+            render(<LocationCard address={randomAddress}/>)
+        });
 
   });

@@ -48,8 +48,8 @@ export const signInWithGoogle = () => {
     signInWithPopup(getAuth(firebase), new GoogleAuthProvider());
   };
 
-  export const signInToTestUser = () => {
-    signInWithEmailAndPassword("testuser@test.com", "123456");
+  export const signInWithCredentials = async (email, password) => {
+    await signInWithEmailAndPassword(getAuth(firebase), email, password);
   };
 
   export const useUserState = () => {
