@@ -21,10 +21,10 @@ class UploadNewDataComponent extends React.Component {
     render() {
         return (
           <div className="upload-new-data">
-            <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event)=>this.setState({name: event.target.value})}/>
-            <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=>this.setState({description: event.target.value})}/>
+            <TextField id="outlined-basic" label="Name" variant="outlined" data-testid="name-textfield" onChange={(event)=>this.setState({name: event.target.value})}/>
+            <TextField id="outlined-basic" labenl="Description" variant="outlined" data-testid="description-textfield" onChange={(event)=>this.setState({description: event.target.value})}/>
             {this.props.user ?
-                (<Button variant="contained" onClick={()=>this.handleSubmit()}>Submit</Button>) :
+                (<Button variant="contained" data-testid="submit-data-button" onClick={()=>this.handleSubmit()}>Submit</Button>) :
                 <SignInButton/>}
           </div>
         );
@@ -33,6 +33,7 @@ class UploadNewDataComponent extends React.Component {
 
 const SignInButton = () => (
     <Button variant="outlined"
+        data-testid="sign-in-button"
         onClick={() => signInWithGoogle()}>
       Sign In
     </Button>

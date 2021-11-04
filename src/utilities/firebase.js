@@ -1,4 +1,4 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup , onIdTokenChanged } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup , onIdTokenChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, onValue, ref , set} from 'firebase/database';
 import {useState, useEffect} from "react";
@@ -46,6 +46,10 @@ export const useData = (path, transform) => {
 
 export const signInWithGoogle = () => {
     signInWithPopup(getAuth(firebase), new GoogleAuthProvider());
+  };
+
+  export const signInToTestUser = () => {
+    signInWithEmailAndPassword("testuser@test.com", "123456");
   };
 
   export const useUserState = () => {
