@@ -47,6 +47,7 @@ const EditButton = ({setIsEditing}) => (
 export const LocationCard = ({address}) => {
   const reformattedAddress = reformatAddress(address);
   const [location, loading, error] = useData('/' + reformattedAddress);
+  console.log(address);
   const [user] = useUserState();
 
   const { search } = window.location;
@@ -54,10 +55,11 @@ export const LocationCard = ({address}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentEdit, setCurrentEdit] = useState('')
 
-  console.log(query)
+  // console.log(query)
 
   const handleEdit = () => {
     editData(reformattedAddress, {description: currentEdit});
+    alert('A location was submitted: ' + currentEdit);
   }
 
   if (error) return <div className="location-container"> <h1>{error}</h1></div>;
@@ -76,21 +78,14 @@ export const LocationCard = ({address}) => {
     location.description = "No Data"
   }
 
-  // if (query != location.name) {
-  //   setLoc()
-    //
-    // console.log(location.name)
-    // console.log(query)}
-  
-
   return (<div className="location-container">
                 <Search/>
                 <h1 className="location-name">{location.name}</h1>
                 <p className="location-address">{address}</p>
                 {!isEditing && <p className="location-desc">{location.description}</p>}
                 {isEditing && <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=> setCurrentEdit(event.target.value)} defaultValue={location.description} /> }
-                {user && !isEditing && <EditButton setIsEditing={setIsEditing} />}
-                {isEditing && <Button variant="contained" onClick={()=> handleEdit()}>Submit</Button>}
+                {user && !isEditing && <EditButton data-testid="editButton" setIsEditing={setIsEditing} />}
+                {isEditing && <Button data-testid="submitButton" variant="contained" onClick={()=> handleEdit()}>Submit</Button>}
             </div>
         );
 };

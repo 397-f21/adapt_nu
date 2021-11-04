@@ -48,15 +48,15 @@ export const signInWithGoogle = () => {
     signInWithPopup(getAuth(firebase), new GoogleAuthProvider());
   };
 
-  export const useUserState = () => {
-    const [user, setUser] = useState();
-  
-    useEffect(() => {
-      onIdTokenChanged(getAuth(firebase), setUser);
-    }, []);
-  
-    return [user];
-  };
+export const useUserState = () => {
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    onIdTokenChanged(getAuth(firebase), setUser);
+  }, []);
+
+  return [user];
+};
 
 export const editData = (path, value) => (
   update(ref(database,path), value)
