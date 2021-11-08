@@ -4,6 +4,7 @@ import {useData, setData, signInWithGoogle, useUserState} from './utilities/fire
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Search from './search'
+import { getDatabase, ref, onValue} from "firebase/database";
 
 const reformatAddress = (address) => address.replace(/[^A-Z0-9]+/ig, "_");
 
@@ -42,16 +43,14 @@ export const LocationCard = ({address}) => {
   const reformattedAddres = reformatAddress(address);
   const [location, loading, error] = useData('/' + reformattedAddres);
   const [user] = useUserState();
+  // const db = getDatabase();
 
   const { search } = window.location;
   const query = new URLSearchParams(search).get('s');
 
-  console.log(query)
-
   if (error) return <div className="location-container"> <h1>{error}</h1></div>;
   if (loading) return <div className="location-container"><h1>Loading the location...</h1></div>
   if (location == null || location.name == null || location.description == null) {
-
       return <div className="location-container">
             <Search/>
             <h1>{address}</h1>
@@ -64,11 +63,6 @@ export const LocationCard = ({address}) => {
     location.description = "No Data"
   }
 
-  // if (query != location.name) {
-  //   setLoc()
-    //
-    // console.log(location.name)
-    // console.log(query)}
 
   return (<div className="location-container">
                 <Search/>
