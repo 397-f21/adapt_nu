@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import MapContainer from "./map";
 import "./App.css";
 import { LocationCard } from "./LocationCard";
-import Search from './search'
 
 const Frame = {
   title: "Adapt NU",
@@ -10,15 +9,16 @@ const Frame = {
 };
 
 const Banner = ({ title, subTitle }) => (
-  <div data-cy="title" className="App-Title">
+  <div className="App-Title">
     <p></p>
     <img
+      data-cy="logo"
       src="https://i.loli.net/2021/10/28/rIKFjT8m3H5c4hv.png"
       alt="AppLogo"
       style={{ width: 50, height: 45 }}
     />
-    <h1>{title}</h1>
-    <i>
+    <h1 data-cy="title">{title}</h1>
+    <i data-cy="subtitle">
       <p>{subTitle}</p>
     </i>
   </div>
