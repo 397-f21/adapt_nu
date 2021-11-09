@@ -10,7 +10,7 @@ const Frame = {
   subTitle: "accessiblity for all",
 };
 
-const Banner = ({ title, subTitle }) => {
+export const Banner = ({ title, subTitle }) => {
 
   return (<div className="App-Title">
     {useUserState()[0] ? <h2 className="signIn">You're signed in!</h2> : <Button className="signIn" variant="contained" onClick={() => signInWithGoogle()}>Sign In</Button>}
