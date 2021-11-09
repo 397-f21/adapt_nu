@@ -22,7 +22,9 @@ it("UploadNewDataComponent uploads the data and displays it on LocationCard",asy
     await act (async () => {
             await signInWithCredentials("testuser@test.com", "123456");
             
-            const signInButton = screen.getByTestId('sign-in-button')
+            await waitFor(() => 
+                expect( screen.getByTestId('submit-data-button')).toBeTruthy())
+
             const button = screen.getByTestId('submit-data-button')
             const nameTextField = screen.getByTestId ('name-textfield')
             const descriptionTextField = screen.getByTestId ('description-textfield')
