@@ -54,7 +54,8 @@ export const LocationCard = ({address}) => {
 
   // console.log(query)
 
-  const handleEdit = () => {
+  const handleEdit = (setIsEditing) => {
+    setIsEditing(false);
     editData(reformattedAddress, {description: currentEdit});
     alert('A location was submitted: ' + currentEdit);
   }
@@ -80,7 +81,7 @@ export const LocationCard = ({address}) => {
                 {!isEditing && <p className="location-desc">{location.description}</p>}
                 {isEditing && <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=> setCurrentEdit(event.target.value)} defaultValue={location.description} /> }
                 {user && !isEditing && <EditButton data-testid="editButton" setIsEditing={setIsEditing} />}
-                {isEditing && <Button data-testid="submitButton" variant="contained" onClick={()=> handleEdit()}>Submit</Button>}
+                {isEditing && <Button data-testid="submitButton" variant="contained" onClick={()=> handleEdit(setIsEditing)}>Submit</Button>}
                 {!user && <SignInButton/>}
             </div>
         );
