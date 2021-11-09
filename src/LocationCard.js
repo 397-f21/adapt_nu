@@ -23,9 +23,7 @@ class UploadNewDataComponent extends React.Component {
           <div className="upload-new-data">
             <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event)=>this.setState({name: event.target.value})}/>
             <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=>this.setState({description: event.target.value})}/>
-            {this.props.user ?
-                (<Button variant="contained" onClick={()=>this.handleSubmit()}>Submit</Button>) :
-                <SignInButton/>}
+            {this.props.user && <Button variant="contained" onClick={()=>this.handleSubmit()}>Submit</Button>}
           </div>
         );
       }
@@ -86,6 +84,7 @@ export const LocationCard = ({address}) => {
                 {isEditing && <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=> setCurrentEdit(event.target.value)} defaultValue={location.description} /> }
                 {user && !isEditing && <EditButton data-testid="editButton" setIsEditing={setIsEditing} />}
                 {isEditing && <Button data-testid="submitButton" variant="contained" onClick={()=> handleEdit()}>Submit</Button>}
+                {!user && <SignInButton/>}
             </div>
         );
 };
