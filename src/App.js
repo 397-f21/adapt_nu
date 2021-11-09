@@ -2,14 +2,18 @@ import React, {useState} from "react";
 import MapContainer from "./map";
 import "./App.css";
 import { LocationCard } from "./LocationCard";
+import Button from '@mui/material/Button'; 
+import {useUserState, signInWithGoogle} from './utilities/firebase.js';
 
 const Frame = {
   title: "Adapt NU",
   subTitle: "accessiblity for all",
 };
 
-const Banner = ({ title, subTitle }) => (
-  <div className="App-Title">
+const Banner = ({ title, subTitle }) => {
+
+  return (<div className="App-Title">
+    {useUserState()[0] ? <h2 className="signIn">You're signed in!</h2> : <Button className="signIn" variant="contained" onClick={() => signInWithGoogle()}>Sign In</Button>}
     <p></p>
     <img
       data-cy="logo"
@@ -21,8 +25,8 @@ const Banner = ({ title, subTitle }) => (
     <i data-cy="subtitle">
       <p>{subTitle}</p>
     </i>
-  </div>
-);
+  </div>)
+};
 
 const App = () => {
 
