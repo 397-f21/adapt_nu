@@ -3,7 +3,6 @@ import './locationCardStyling.css';
 import {useData, setData, signInWithGoogle, useUserState, editData} from './utilities/firebase.js';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Search from './search'
 
 const reformatAddress = (address) => address.replace(/[^A-Z0-9]+/ig, "_");
 
@@ -65,7 +64,6 @@ export const LocationCard = ({address}) => {
   if (location == null || location.name == null || location.description == null) {
 
       return <div data-cy="LocationCard" className="location-container">
-            <Search/>
             <h1>{address}</h1>
             <p>No data exists for {address}!</p>
             <UploadNewDataComponent address={reformattedAddress} user={user}/>
@@ -77,7 +75,6 @@ export const LocationCard = ({address}) => {
   }
 
   return (<div data-cy="LocationCard" className="location-container">
-                <Search/>
                 <h1 className="location-name">{location.name}</h1>
                 <p className="location-address">{address}</p>
                 {!isEditing && <p className="location-desc">{location.description}</p>}
