@@ -8,7 +8,7 @@ const MapContainer = ({setLoc}) => {
 
   const mapStyles = {
     height: "88vh",
-    width: "60%"
+    width: "60%",
   };
 
   const defaultCenter = {

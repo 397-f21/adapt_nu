@@ -28,7 +28,7 @@ class UploadNewDataComponent extends React.Component {
       }
 }
 
-const SignInButton = () => (
+export const SignInButton = () => (
     <Button variant="outlined"
         onClick={() => signInWithGoogle()}>
       Sign In
