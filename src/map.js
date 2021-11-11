@@ -8,7 +8,7 @@ const MapContainer = ({setLoc}) => {
 
   const mapStyles = {
     height: "88vh",
-    width: "60%"
+    width: "100%"
   };
 
   const defaultCenter = {
@@ -16,9 +16,11 @@ const MapContainer = ({setLoc}) => {
   };
 
   return (
+    <div data-cy="map">
      <LoadScript
        googleMapsApiKey= 'AIzaSyD4_AYzIWR9qSfvZDUSXpHLpC7vsQowkUg'>
         <GoogleMap
+          className="googleMap"
           mapContainerStyle={mapStyles}
           zoom={16}
           center={defaultCenter}
@@ -36,7 +38,7 @@ const MapContainer = ({setLoc}) => {
             } 
           }
         />
-     </LoadScript>
+     </LoadScript></div>
   )
 }
 

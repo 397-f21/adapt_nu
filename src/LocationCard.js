@@ -3,7 +3,6 @@ import './locationCardStyling.css';
 import {useData, setData, signInWithGoogle, useUserState, editData} from './utilities/firebase.js';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Search from './search'
 
 const reformatAddress = (address) => address.replace(/[^A-Z0-9]+/ig, "_");
 
@@ -23,15 +22,13 @@ class UploadNewDataComponent extends React.Component {
           <div className="upload-new-data">
             <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event)=>this.setState({name: event.target.value})}/>
             <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=>this.setState({description: event.target.value})}/>
-            {this.props.user ?
-                (<Button variant="contained" onClick={()=>this.handleSubmit()}>Submit</Button>) :
-                <SignInButton/>}
+            {this.props.user && <Button variant="contained" onClick={()=>this.handleSubmit()}>Submit</Button>}
           </div>
         );
       }
 }
 
-const SignInButton = () => (
+export const SignInButton = () => (
     <Button variant="outlined"
         onClick={() => signInWithGoogle()}>
       Sign In
@@ -57,7 +54,8 @@ export const LocationCard = ({address}) => {
 
   // console.log(query)
 
-  const handleEdit = () => {
+  const handleEdit = (setIsEditing) => {
+    setIsEditing(false);
     editData(reformattedAddress, {description: currentEdit});
     alert('A location was submitted: ' + currentEdit);
   }
@@ -66,8 +64,7 @@ export const LocationCard = ({address}) => {
   if (loading) return <div className="location-container"><h1>Loading the location...</h1></div>
   if (location == null || location.name == null || location.description == null) {
 
-      return <div className="location-container">
-            <Search/>
+      return <div data-cy="LocationCard" className="location-container">
             <h1>{address}</h1>
             <p>No data exists for {address}!</p>
             <UploadNewDataComponent address={reformattedAddress} user={user}/>
@@ -78,14 +75,14 @@ export const LocationCard = ({address}) => {
     location.description = "No Data"
   }
 
-  return (<div className="location-container">
-                <Search/>
+  return (<div data-cy="LocationCard" className="location-container">
                 <h1 className="location-name">{location.name}</h1>
                 <p className="location-address">{address}</p>
                 {!isEditing && <p className="location-desc">{location.description}</p>}
                 {isEditing && <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(event)=> setCurrentEdit(event.target.value)} defaultValue={location.description} /> }
                 {user && !isEditing && <EditButton data-testid="editButton" setIsEditing={setIsEditing} />}
-                {isEditing && <Button data-testid="submitButton" variant="contained" onClick={()=> handleEdit()}>Submit</Button>}
+                {isEditing && <Button data-testid="submitButton" variant="contained" onClick={()=> handleEdit(setIsEditing)}>Submit</Button>}
+                {!user && <SignInButton/>}
             </div>
         );
 };

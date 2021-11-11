@@ -10,6 +10,8 @@ All the test files are in the `/test` folders, please rename your files like `nu
 
 All the tests are as follows:
 
+**Test 1:**
+
 - clicking on the map & having the building name appear on the right side
 - when you search for a building the building name & info will appear
 - typos in the search bar error message or no building found
@@ -28,6 +30,14 @@ Liqian - 4
 Zachary - 5
 
 Can - 6
+
+**Test 2:**
+- Search Bar renders
+- Upload Image Button renders
+- Edit button renders
+- search makes the correct query to firebase
+- Image is uploaded to firebase
+- edit makes correct request to firebase
 
 ---
 

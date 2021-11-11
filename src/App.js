@@ -2,27 +2,31 @@ import React, {useState} from "react";
 import MapContainer from "./map";
 import "./App.css";
 import { LocationCard } from "./LocationCard";
-import Search from './search'
+import Button from '@mui/material/Button'; 
+import {useUserState, signInWithGoogle} from './utilities/firebase.js';
 
 const Frame = {
   title: "Adapt NU",
   subTitle: "accessiblity for all",
 };
 
-const Banner = ({ title, subTitle }) => (
-  <div className="App-Title">
+export const Banner = ({ title, subTitle }) => {
+
+  return (<div className="App-Title">
+    {useUserState()[0] ? <h2 className="signIn">You're signed in!</h2> : <Button className="signIn" variant="contained" onClick={() => signInWithGoogle()}>Sign In</Button>}
     <p></p>
     <img
+      data-cy="logo"
       src="https://i.loli.net/2021/10/28/rIKFjT8m3H5c4hv.png"
       alt="AppLogo"
       style={{ width: 50, height: 45 }}
     />
-    <h1>{title}</h1>
-    <i>
+    <h1 data-cy="title">{title}</h1>
+    <i data-cy="subtitle">
       <p>{subTitle}</p>
     </i>
-  </div>
-);
+  </div>)
+};
 
 const App = () => {
 
