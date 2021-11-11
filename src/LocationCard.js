@@ -47,8 +47,6 @@ export const LocationCard = ({address}) => {
   console.log(address);
   const [user] = useUserState();
 
-  const { search } = window.location;
-  const query = new URLSearchParams(search).get('s');
   const [isEditing, setIsEditing] = useState(false);
   const [currentEdit, setCurrentEdit] = useState('')
 
